@@ -47,6 +47,7 @@
     width: 45vh;
     background-color: lightgray;
     margin: auto;
+    user-select: none;
 }
 
 #buttonsContainer {
@@ -59,7 +60,7 @@
     margin: auto;
 }
 
-.test {
+.button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -99,5 +100,6 @@
     font-size: 3vh;
     text-align: right;
     margin-right: 2%;
+    user-select: none;
     
 }
