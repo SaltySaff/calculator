@@ -41,15 +41,286 @@ const equals = document.getElementById("equals");
 
 //button event listeners
 
+const keyRecorder = [];
+let storeNumber = 0;
+const storeNumbers = []
+
 clear.addEventListener('click', () => {
     displayText.textContent = "";
     sumText.textContent = "";
+    keyRecorder.splice(0, keyRecorder.length);
+    storeNumber = "";
+    storeNumbers.splice(0, storeNumbers.length);
+
+});
+
+//display max character count
+
+const maxCharCount = 16;
+
+
+
+//numbers
+
+one.addEventListener('click', () => {
+    if(displayText.textContent.length < maxCharCount) {
+        displayText.textContent += 1;
+        storeNumber += 1;
+        keyRecorder.push(1);
+    }
+});
+
+two.addEventListener('click', () => {
+    if(displayText.textContent.length < maxCharCount) {
+        displayText.textContent += 2;
+        keyRecorder.push(2);
+        storeNumber += 2;
+    }   
+});
+
+three.addEventListener('click', () => {
+    if(displayText.textContent.length < maxCharCount) {
+        displayText.textContent += 3;
+        keyRecorder.push(3);
+        storeNumber += 3;
+    }   
+});
+
+four.addEventListener('click', () => {
+    if(displayText.textContent.length < maxCharCount) {
+        displayText.textContent += 4;
+        keyRecorder.push(4);
+        storeNumber += 4;
+    }   
+});
+
+five.addEventListener('click', () => {
+    if(displayText.textContent.length < maxCharCount) {
+        displayText.textContent += 5;
+        keyRecorder.push(5);
+        storeNumber += 5;
+    }   
+});
+
+six.addEventListener('click', () => {
+    if(displayText.textContent.length < maxCharCount) {
+        displayText.textContent += 6;
+        keyRecorder.push(6);
+        storeNumber += 6;
+    }   
+});
+
+seven.addEventListener('click', () => {
+    if(displayText.textContent.length < maxCharCount) {
+        displayText.textContent += 7;
+        keyRecorder.push(7);
+        storeNumber += 7;
+    }   
+});
+
+eight.addEventListener('click', () => {
+    if(displayText.textContent.length < maxCharCount) {
+        displayText.textContent += 8;
+        keyRecorder.push(1);
+        storeNumber += 8;
+    }   
+});
+
+nine.addEventListener('click', () => {
+    if(displayText.textContent.length < maxCharCount) {
+        displayText.textContent += 9;
+        keyRecorder.push(9);
+        storeNumber += 9;
+    }   
+});
+
+zero.addEventListener('click', () => {
+    if(displayText.textContent.length < maxCharCount) {
+        displayText.textContent += 0;
+        keyRecorder.push(0);
+        storeNumber += 0;
+    }   
+});
+
+decimal.addEventListener('click', () => {
+    if(displayText.textContent.length < maxCharCount) {
+        displayText.textContent += ".";
+        keyRecorder.push(".");
+        storeNumber += ".";
+    }   
 });
 
 
 
+//operators
+
+opPlus.addEventListener('click', () => {
+    console.log(storeNumbers);
+    if(sumText.textContent == "" && displayText.textContent == "") {
+        sumText.textContent += 0 + ` + `;
+        displayText.textContent = "";
+        keyRecorder.push("+");
+    } else {
+        sumText.textContent += displayText.textContent + ` + `; 
+        displayText.textContent = "";
+        keyRecorder.push("+");
+    }
+    storeNumbers.push(storeNumber);
+    storeNumbers.push("+");
+    storeNumber = "";
+
+    if(storeNumbers[2] != undefined) { //if there is already 2 numbers
+        switch(storeNumbers[1]) {
+            case "+":
+            storeNumbers[0] = operate(add, parseInt(storeNumbers[0]), parseInt(storeNumbers[2]));
+            break;
+            case "-":
+            storeNumbers[0] = operate(minus, parseInt(storeNumbers[0]), parseInt(storeNumbers[2]));
+            break;
+            case "x":
+            storeNumbers[0] = operate(multiply, parseInt(storeNumbers[0]), parseInt(storeNumbers[2]));
+            break;
+            case "÷":
+            storeNumbers[0] = operate(divide, parseInt(storeNumbers[0]), parseInt(storeNumbers[2]));
+            break;
+        }
+        storeNumbers.splice(1, 2);
+    }
+});
+
+opMinus.addEventListener('click', () => {
+    if(sumText.textContent == "" && displayText.textContent == "") {
+        sumText.textContent += 0 + ` - `;
+        displayText.textContent = "";
+        keyRecorder.push("-");
+    } else {
+        sumText.textContent += displayText.textContent + ` - `; 
+        displayText.textContent = "";
+        keyRecorder.push("-");
+    }
+    storeNumbers.push(storeNumber);
+    storeNumbers.push("-");
+    storeNumber = "";
+
+    if(storeNumbers[2] != undefined) { //if there is already 2 numbers
+        switch(storeNumbers[1]) {
+            case "+":
+            storeNumbers[0] = operate(add, parseInt(storeNumbers[0]), parseInt(storeNumbers[2]));
+            break;
+            case "-":
+            storeNumbers[0] = operate(minus, parseInt(storeNumbers[0]), parseInt(storeNumbers[2]));
+            break;
+            case "x":
+            storeNumbers[0] = operate(multiply, parseInt(storeNumbers[0]), parseInt(storeNumbers[2]));
+            break;
+            case "÷":
+            storeNumbers[0] = operate(divide, parseInt(storeNumbers[0]), parseInt(storeNumbers[2]));
+            break;
+        }
+        storeNumbers.splice(1, 2);
+    }
+});
+
+opMultiply.addEventListener('click', () => {
+    if(sumText.textContent == "" && displayText.textContent == "") {
+        sumText.textContent += 0 + ` x `;
+        displayText.textContent = "";
+        keyRecorder.push("x");
+    } else {
+        sumText.textContent += displayText.textContent + ` x `; 
+        displayText.textContent = "";
+        keyRecorder.push("x");
+    }
+    storeNumbers.push(storeNumber);
+    storeNumbers.push("x");
+    storeNumber = "";
+
+    if(storeNumbers[2] != undefined) { //if there is already 2 numbers
+        switch(storeNumbers[1]) {
+            case "+":
+            storeNumbers[0] = operate(add, parseInt(storeNumbers[0]), parseInt(storeNumbers[2]));
+            break;
+            case "-":
+            storeNumbers[0] = operate(minus, parseInt(storeNumbers[0]), parseInt(storeNumbers[2]));
+            break;
+            case "x":
+            storeNumbers[0] = operate(multiply, parseInt(storeNumbers[0]), parseInt(storeNumbers[2]));
+            break;
+            case "÷":
+            storeNumbers[0] = operate(divide, parseInt(storeNumbers[0]), parseInt(storeNumbers[2]));
+            break;
+        }
+        storeNumbers.splice(1, 2);
+    }
+});
+
+opDivide.addEventListener('click', () => {
+    if(sumText.textContent == "" && displayText.textContent == "") {
+        sumText.textContent += 0 + ` ÷ `;
+        displayText.textContent = "";
+        keyRecorder.push("÷");
+    } else {
+        sumText.textContent += displayText.textContent + ` ÷ `; 
+        displayText.textContent = "";
+        keyRecorder.push("÷");
+    }
+    storeNumbers.push(storeNumber);
+    storeNumbers.push("÷");
+    storeNumber = "";
+
+    if(storeNumbers[2] != undefined) { //if there is already 2 numbers
+        switch(storeNumbers[1]) {
+            case "+":
+            storeNumbers[0] = operate(add, parseInt(storeNumbers[0]), parseInt(storeNumbers[2]));
+            break;
+            case "-":
+            storeNumbers[0] = operate(minus, parseInt(storeNumbers[0]), parseInt(storeNumbers[2]));
+            break;
+            case "x":
+            storeNumbers[0] = operate(multiply, parseInt(storeNumbers[0]), parseInt(storeNumbers[2]));
+            break;
+            case "÷":
+            storeNumbers[0] = operate(divide, parseInt(storeNumbers[0]), parseInt(storeNumbers[2]));
+            break;
+        }
+        storeNumbers.splice(1, 2);
+    }
+});
+
+//equals
 
 
+equals.addEventListener('click', () => {
+    if(sumText.textContent == "" && displayText.textContent == "") {
+        sumText.textContent += 0 + ` = `;
+        displayText.textContent = "";
+        keyRecorder.push("=");
+    } else {
+        sumText.textContent += displayText.textContent + ` = `; 
+        displayText.textContent = "";
+        keyRecorder.push("=");
+    }
+
+    storeNumbers.push(storeNumber);
+    storeNumber = "";
+
+    switch(storeNumbers[1]) {
+        case "+":
+            displayText.textContent = operate(add, parseInt(storeNumbers[0]), parseInt(storeNumbers[2]));
+            break;
+        case "-":
+            displayText.textContent = operate(minus, parseInt(storeNumbers[0]), parseInt(storeNumbers[2]));
+            break;
+        case "x":
+            displayText.textContent = operate(multiply, parseInt(storeNumbers[0]), parseInt(storeNumbers[2]));
+            break;
+        case "÷":
+            displayText.textContent = operate(divide, parseInt(storeNumbers[0]), parseInt(storeNumbers[2]));
+            break;
+    }
+    
+    
+});
 
 //operator functions
 
@@ -57,7 +328,7 @@ let add = function(a, b) {
     return a + b;
 }
 
-let subtract = function(a, b) {
+let minus = function(a, b) {
     return a - b;
 }
 
@@ -73,4 +344,4 @@ let operate = function(operator, a, b) {
     return operator(a, b);
 }
 
-console.log(operate(divide, 1, 2));
+

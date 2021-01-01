@@ -7,7 +7,7 @@
 #title {
     text-align: center;
     margin: 0px auto;
-    font-family: 'Audiowide', cursive;
+    font-family: 'Courier New', Courier, monospace;
     font-size: 8vh;
     width: 500px;
     margin-top: 100px;
@@ -61,6 +61,7 @@
 }
 
 .button {
+    font-family: 'Courier New', Courier, monospace;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -75,8 +76,11 @@
     justify-content: center;
     height: 4vh;
     width: 42vh;
-    background-color: white;
+    background-color: transparent;
     margin: auto;
+    overflow-y: hidden;
+    overflow-x: auto;
+    white-space: nowrap;
 
 }
 
@@ -86,20 +90,45 @@
     justify-content: center;
     height: 6vh;
     width: 42vh;
-    background-color: white;
+    background-color: transparent;
     margin: auto;
+    overflow-y: hidden;
+    overflow-x: auto;
+    white-space: nowrap;
 }
 
 #displayText {
+    font-family: 'Courier New', Courier, monospace;
     font-size: 5vh;
     text-align: right;
     margin-right: 2%;
 }
 
 #sumText {
+    font-family: 'Courier New', Courier, monospace;
     font-size: 3vh;
     text-align: right;
     margin-right: 2%;
     user-select: none;
     
 }
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: grey; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
