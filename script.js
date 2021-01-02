@@ -2,6 +2,7 @@
 //dom
 
 const buttons = document.querySelectorAll(".button");
+const numButtons = document.querySelectorAll(".numButton");
 
 buttons.forEach((button) => {
         
@@ -14,11 +15,21 @@ buttons.forEach((button) => {
     });
 });
 
+numButtons.forEach((numButton) => {
+        
+    numButton.addEventListener('mouseover', () => {
+        numButton.style.cssText = 'background-color: white; color: black';
+    });
+
+    numButton.addEventListener('mouseout', () => {
+        numButton.style.cssText = 'background-color: rgb(85, 84, 84); color: white';
+    });
+});
 
 const sumText = document.getElementById("sumText");
 const displayText = document.getElementById("displayText");
 
-const calcRoot = document.getElementById("root");
+const bSpace = document.getElementById("bSpace");
 const calcPower = document.getElementById("power");
 const clear = document.getElementById("clear");
 const opDivide = document.getElementById("divide");
@@ -42,7 +53,7 @@ const equals = document.getElementById("equals");
 //button event listeners
 
 const keyRecorder = [];
-let storeNumber = 0;
+let storeNumber = "";
 const storeNumbers = []
 
 clear.addEventListener('click', () => {
@@ -51,6 +62,13 @@ clear.addEventListener('click', () => {
     keyRecorder.splice(0, keyRecorder.length);
     storeNumber = "";
     storeNumbers.splice(0, storeNumbers.length);
+
+});
+
+bSpace.addEventListener('click', () => {
+    displayText.textContent = displayText.textContent.substring(0, displayText.textContent.length - 1);
+    keyRecorder.splice(keyRecorder.length - 1, 1);
+    storeNumber = storeNumber.substring(0, storeNumber.length -1);
 
 });
 
@@ -144,18 +162,31 @@ zero.addEventListener('click', () => {
 
 decimal.addEventListener('click', () => {
     if(displayText.textContent.length < maxCharCount) {
+        if(storeNumber.indexOf(".") == -1) {
         displayText.textContent += ".";
         keyRecorder.push(".");
         storeNumber += ".";
+        }
     }   
 });
 
+negateNumber.addEventListener('click', () => {
+    if(displayText.textContent.length < maxCharCount) {
+        if(displayText.textContent[0] == "-") {
+            displayText.textContent = displayText.textContent.substring(1);
+            storeNumber = storeNumber.substring(1);
+        } else {
+        displayText.textContent = "-" + displayText.textContent;
+        keyRecorder.push(".");
+        storeNumber = "-" + storeNumber;
+        }
+    }   
+});
 
 
 //operators
 
 opPlus.addEventListener('click', () => {
-    console.log(storeNumbers);
     if(sumText.textContent == "" && displayText.textContent == "") {
         sumText.textContent += 0 + ` + `;
         displayText.textContent = "";
@@ -172,17 +203,20 @@ opPlus.addEventListener('click', () => {
     if(storeNumbers[2] != undefined) { //if there is already 2 numbers
         switch(storeNumbers[1]) {
             case "+":
-            storeNumbers[0] = operate(add, parseInt(storeNumbers[0]), parseInt(storeNumbers[2]));
-            break;
+                storeNumbers[0] = operate(add, parseFloat(storeNumbers[0]), parseInt(storeNumbers[2]));
+                break;
             case "-":
-            storeNumbers[0] = operate(minus, parseInt(storeNumbers[0]), parseInt(storeNumbers[2]));
-            break;
+                storeNumbers[0] = operate(minus, parseFloat(storeNumbers[0]), parseInt(storeNumbers[2]));
+                break;
             case "x":
-            storeNumbers[0] = operate(multiply, parseInt(storeNumbers[0]), parseInt(storeNumbers[2]));
-            break;
+                storeNumbers[0] = operate(multiply, parseFloat(storeNumbers[0]), parseInt(storeNumbers[2]));
+                break;
             case "÷":
-            storeNumbers[0] = operate(divide, parseInt(storeNumbers[0]), parseInt(storeNumbers[2]));
-            break;
+                storeNumbers[0] = operate(divide, parseFloat(storeNumbers[0]), parseInt(storeNumbers[2]));
+                break;
+            case "^":
+                storeNumbers[0] = operate(power, parseFloat(storeNumbers[0]), parseInt(storeNumbers[2]));
+                break;
         }
         storeNumbers.splice(1, 2);
     }
@@ -205,17 +239,20 @@ opMinus.addEventListener('click', () => {
     if(storeNumbers[2] != undefined) { //if there is already 2 numbers
         switch(storeNumbers[1]) {
             case "+":
-            storeNumbers[0] = operate(add, parseInt(storeNumbers[0]), parseInt(storeNumbers[2]));
-            break;
+                storeNumbers[0] = operate(add, parseFloat(storeNumbers[0]), parseInt(storeNumbers[2]));
+                break;
             case "-":
-            storeNumbers[0] = operate(minus, parseInt(storeNumbers[0]), parseInt(storeNumbers[2]));
-            break;
+                storeNumbers[0] = operate(minus, parseFloat(storeNumbers[0]), parseInt(storeNumbers[2]));
+                break;
             case "x":
-            storeNumbers[0] = operate(multiply, parseInt(storeNumbers[0]), parseInt(storeNumbers[2]));
-            break;
+                storeNumbers[0] = operate(multiply, pparseFloat(storeNumbers[0]), parseInt(storeNumbers[2]));
+                break;
             case "÷":
-            storeNumbers[0] = operate(divide, parseInt(storeNumbers[0]), parseInt(storeNumbers[2]));
-            break;
+                storeNumbers[0] = operate(divide, parseFloat(storeNumbers[0]), parseInt(storeNumbers[2]));
+                break;
+            case "^":
+                storeNumbers[0] = operate(power, parseFloat(storeNumbers[0]), parseInt(storeNumbers[2]));
+                break;
         }
         storeNumbers.splice(1, 2);
     }
@@ -238,17 +275,20 @@ opMultiply.addEventListener('click', () => {
     if(storeNumbers[2] != undefined) { //if there is already 2 numbers
         switch(storeNumbers[1]) {
             case "+":
-            storeNumbers[0] = operate(add, parseInt(storeNumbers[0]), parseInt(storeNumbers[2]));
-            break;
+                storeNumbers[0] = operate(add, parseFloat(storeNumbers[0]), parseInt(storeNumbers[2]));
+                break;
             case "-":
-            storeNumbers[0] = operate(minus, parseInt(storeNumbers[0]), parseInt(storeNumbers[2]));
-            break;
+                storeNumbers[0] = operate(minus, parseFloat(storeNumbers[0]), parseInt(storeNumbers[2]));
+                break;
             case "x":
-            storeNumbers[0] = operate(multiply, parseInt(storeNumbers[0]), parseInt(storeNumbers[2]));
-            break;
+                storeNumbers[0] = operate(multiply, parseFloat(storeNumbers[0]), parseInt(storeNumbers[2]));
+                break;
             case "÷":
-            storeNumbers[0] = operate(divide, parseInt(storeNumbers[0]), parseInt(storeNumbers[2]));
-            break;
+                storeNumbers[0] = operate(divide, parseFloat(storeNumbers[0]), parseInt(storeNumbers[2]));
+                break;
+            case "^":
+                storeNumbers[0] = operate(power, parseFloat(storeNumbers[0]), parseInt(storeNumbers[2]));
+                break;
         }
         storeNumbers.splice(1, 2);
     }
@@ -271,17 +311,57 @@ opDivide.addEventListener('click', () => {
     if(storeNumbers[2] != undefined) { //if there is already 2 numbers
         switch(storeNumbers[1]) {
             case "+":
-            storeNumbers[0] = operate(add, parseInt(storeNumbers[0]), parseInt(storeNumbers[2]));
-            break;
+                storeNumbers[0] = operate(add, parseFloat(storeNumbers[0]), parseInt(storeNumbers[2]));
+                break;
             case "-":
-            storeNumbers[0] = operate(minus, parseInt(storeNumbers[0]), parseInt(storeNumbers[2]));
-            break;
+                storeNumbers[0] = operate(minus, parseFloat(storeNumbers[0]), parseInt(storeNumbers[2]));
+                break;
             case "x":
-            storeNumbers[0] = operate(multiply, parseInt(storeNumbers[0]), parseInt(storeNumbers[2]));
-            break;
+                storeNumbers[0] = operate(multiply, parseFloat(storeNumbers[0]), parseInt(storeNumbers[2]));
+                break;
             case "÷":
-            storeNumbers[0] = operate(divide, parseInt(storeNumbers[0]), parseInt(storeNumbers[2]));
-            break;
+                storeNumbers[0] = operate(divide, parseFloat(storeNumbers[0]), parseInt(storeNumbers[2]));
+                break;
+            case "^":
+                storeNumbers[0] = operate(power, parseFloat(storeNumbers[0]), parseInt(storeNumbers[2]));
+                break;
+        }
+        storeNumbers.splice(1, 2);
+    }
+});
+
+calcPower.addEventListener('click', () => {
+    if(sumText.textContent == "" && displayText.textContent == "") {
+        sumText.textContent += 0 + ` ^ `;
+        displayText.textContent = "";
+        keyRecorder.push("^");
+    } else {
+        sumText.textContent += displayText.textContent + ` ^ `; 
+        displayText.textContent = "";
+        keyRecorder.push("^");
+    }
+    storeNumbers.push(storeNumber);
+    storeNumbers.push("^");
+    storeNumber = "";
+
+    if(storeNumbers[2] != undefined) { //if there is already 2 numbers
+        switch(storeNumbers[1]) {
+            case "+":
+                storeNumbers[0] = operate(add, parseFloat(storeNumbers[0]), parseInt(storeNumbers[2]));
+                break;
+            case "-":
+                storeNumbers[0] = operate(minus, parseFloat(storeNumbers[0]), parseInt(storeNumbers[2]));
+                break;
+            case "x":
+                storeNumbers[0] = operate(multiply, parseFloat(storeNumbers[0]), parseInt(storeNumbers[2]));
+                break;
+            case "÷":
+                storeNumbers[0] = operate(divide, parseFloat(storeNumbers[0]), parseInt(storeNumbers[2]));
+                break;
+            case "^":
+                storeNumbers[0] = operate(power, parseFloat(storeNumbers[0]), parseInt(storeNumbers[2]));
+                break;
+
         }
         storeNumbers.splice(1, 2);
     }
@@ -306,16 +386,19 @@ equals.addEventListener('click', () => {
 
     switch(storeNumbers[1]) {
         case "+":
-            displayText.textContent = operate(add, parseInt(storeNumbers[0]), parseInt(storeNumbers[2]));
+            displayText.textContent = operate(add, parseFloat(storeNumbers[0]), parseInt(storeNumbers[2]));
             break;
         case "-":
-            displayText.textContent = operate(minus, parseInt(storeNumbers[0]), parseInt(storeNumbers[2]));
+            displayText.textContent = operate(minus, parseFloat(storeNumbers[0]), parseInt(storeNumbers[2]));
             break;
         case "x":
-            displayText.textContent = operate(multiply, parseInt(storeNumbers[0]), parseInt(storeNumbers[2]));
+            displayText.textContent = operate(multiply, parseFloat(storeNumbers[0]), parseInt(storeNumbers[2]));
             break;
         case "÷":
-            displayText.textContent = operate(divide, parseInt(storeNumbers[0]), parseInt(storeNumbers[2]));
+            displayText.textContent = operate(divide, parseFloat(storeNumbers[0]), parseInt(storeNumbers[2]));
+            break;
+        case "^":
+            displayText.textContent = operate(power, parseFloat(storeNumbers[0]), parseInt(storeNumbers[2]));
             break;
     }
     
@@ -343,5 +426,13 @@ let divide = function(a, b) {
 let operate = function(operator, a, b) {
     return operator(a, b);
 }
+
+let power = function(a, b) {
+    return a ** b;
+}
+
+
+
+
 
 

@@ -1,7 +1,12 @@
+body {
+    background-color: skyblue;
+}
+
 #container {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    
 }
 
 #title {
@@ -26,6 +31,7 @@
     border-style: solid;
     border-color: black;
     margin: auto;
+    box-shadow: 5px 5px;
 
 }
 
@@ -37,6 +43,8 @@
     width: 45vh;
     background-color: lightgray;
     margin: auto;
+    border-style: solid;
+    border-width: 1pxd;
 }
 
 #buttons {
@@ -49,6 +57,7 @@
     margin: auto;
     user-select: none;
 }
+
 
 #buttonsContainer {
     display: grid;
@@ -67,9 +76,24 @@
     align-items: center;
     background-color: grey;
     border-style: solid;
-    border-color: black;
+    border-color: rgb(204, 202, 202);
+    border-width: 1px;
     font-size: 2.5vh;
 }
+
+.numButton {
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(85, 84, 84);
+    border-style: solid;
+    border-color: rgb(204, 202, 202);
+    border-width: 1px;
+    font-size: 2.5vh;
+    color: white;
+}
+
 #sumDisplay {
     display: inline-flex;
     flex-direction: column;
